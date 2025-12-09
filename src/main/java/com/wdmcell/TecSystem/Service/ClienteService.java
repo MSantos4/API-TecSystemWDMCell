@@ -36,6 +36,19 @@ public class ClienteService {
         );
     }
 
+    public ClienteResponse buscarPorId(Long id) {
+        Cliente cliente = clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+        return new ClienteResponse(
+                cliente.getId(),
+                cliente.getNome(),
+                cliente.getCpf(),
+                cliente.getTelefone(),
+                cliente.getEmail()
+        );
+    }
+
     public void deletar(Long id) {
         if (!clienteRepository.existsById(id)) {
             throw new RuntimeException("Cliente não encontrado");

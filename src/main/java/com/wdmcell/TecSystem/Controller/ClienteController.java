@@ -19,7 +19,7 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     @PostMapping
-    public ResponseEntity<Response<ClienteResponse>> salvar(@RequestBody ClienteDTO clienteDTO)  {
+    public ResponseEntity<Response<ClienteResponse>> salvar(@RequestBody ClienteDTO clienteDTO) {
         try {
             ClienteResponse clienteResponse = clienteService.salvar(clienteDTO);
 
@@ -43,6 +43,32 @@ public class ClienteController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Response<ClienteResponse>> buscarCliente(@PathVariable Long id) {
+        try {
+            ClienteResponse clienteResponse = clienteService.buscarPorId(id);
+
+            Response<ClienteResponse> response = new Response<>(
+                    "Sucesso",
+                    "Cliente encontrado com sucesso!",
+                    LocalDateTime.now(),
+                    clienteResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        } catch (Exception e) {
+            Response<ClienteResponse> response = new Response<>(
+                    "Erro",
+                    "Cliente não encontrado: " + e.getMessage(),
+                    LocalDateTime.now(),
+                    null
+            );
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Response<Void>> deletar(@PathVariable Long id) {
         try {
@@ -51,8 +77,7 @@ public class ClienteController {
             Response<Void> response = new Response<>(
                     "Sucesso",
                     "Cliente deletado com sucesso!",
-                    LocalDateTime.now(),
-                    null
+                    LocalDateTime.now()
             );
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -61,12 +86,9 @@ public class ClienteController {
             Response<Void> response = new Response<>(
                     "Erro",
                     "Erro ao deletar cliente: " + e.getMessage(),
-                    LocalDateTime.now(),
-                    null
+                    LocalDateTime.now()
             );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
-
-
 }
