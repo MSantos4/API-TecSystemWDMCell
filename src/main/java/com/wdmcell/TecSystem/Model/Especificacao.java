@@ -26,4 +26,6 @@ public class Especificacao {
     @OneToOne @JoinColumn(name = "id_produto")
     private Produto produto;
 
+    public Especificacao(String tela, String processador, String armazenamento, String memoria, String bateria, String sistema, Double espessura, Double peso) {
+    }
 }
