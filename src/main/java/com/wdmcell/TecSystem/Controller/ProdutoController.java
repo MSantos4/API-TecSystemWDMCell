@@ -1,12 +1,10 @@
 package com.wdmcell.TecSystem.Controller;
 
-import com.wdmcell.TecSystem.DTO.ClienteDTO;
+import com.wdmcell.TecSystem.DTO.EstoqueDTO;
 import com.wdmcell.TecSystem.DTO.ProdutoDTO;
-import com.wdmcell.TecSystem.DTO.Response.ClienteResponse;
 import com.wdmcell.TecSystem.DTO.Response.ProdutoResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.ProdutoService;
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,13 +47,13 @@ public class ProdutoController {
     @GetMapping
     public ResponseEntity<Response<List<ProdutoResponse>>> buscarProdutos() {
         try {
-            List<ProdutoResponse> clientesResponse = produtoService.buscarClientes();
+            List<ProdutoResponse> produtosResponse = produtoService.buscarClientes();
 
             Response<List<ProdutoResponse>> response = new Response<>(
                     "Sucesso",
                     "Produto encontrado com sucesso!",
                     LocalDateTime.now(),
-                    clientesResponse
+                    produtosResponse
             );
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -70,10 +68,35 @@ public class ProdutoController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<Response<List<EstoqueDTO>>> listarEstoque() {
+        try {
+            List<EstoqueDTO> clientesResponse = produtoService.buscarEstoque();
+
+            Response<List<EstoqueDTO>> response = new Response<>(
+                    "Sucesso",
+                    "Estoque encontrado",
+                    LocalDateTime.now(),
+                    clientesResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            Response<List<EstoqueDTO>> response = new Response<>(
+                    "Erro",
+                   " Estoque não encotrado",
+                    LocalDateTime.now(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+
     @PutMapping
     public ResponseEntity<Response<ProdutoResponse>> editar(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
         try {
-            ProdutoResponse  produtoEditadoResponse = produtoService.editar(id, produtoDTO);
+            ProdutoResponse produtoEditadoResponse = produtoService.editar(id, produtoDTO);
 
             Response<ProdutoResponse> response = new Response<>(
                     "Sucesso",
