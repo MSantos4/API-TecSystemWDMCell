@@ -7,16 +7,14 @@ import com.wdmcell.TecSystem.Service.FuncionarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("funcionario")
+@RequestMapping("funcionarios")
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
@@ -43,6 +41,103 @@ public class FuncionarioController {
             );
 
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<Response<List<FuncionarioResponse>>> buscarClientes() {
+        try {
+            List<FuncionarioResponse> funcionarioResponse = funcionarioService.buscarFuncionarios();
+
+            Response<List<FuncionarioResponse>> response = new Response<>(
+                    "Sucesso",
+                    "Funcionário encontrado com sucesso!",
+                    LocalDateTime.now(),
+                    funcionarioResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            Response<List<FuncionarioResponse>> response = new Response<>(
+                    "Erro",
+                    e.getMessage(),
+                    LocalDateTime.now(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Response<FuncionarioResponse>> buscarCliente(@PathVariable Long id) {
+        try {
+            FuncionarioResponse clienteResponse = funcionarioService.buscarPorId(id);
+
+            Response<FuncionarioResponse> response = new Response<>(
+                    "Sucesso",
+                    "Funcionário encontrado com sucesso!",
+                    LocalDateTime.now(),
+                    clienteResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        } catch (Exception e) {
+            Response<FuncionarioResponse> response = new Response<>(
+                    "Erro",
+                    e.getMessage(),
+                    LocalDateTime.now(),
+                    null
+            );
+
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Response<FuncionarioResponse>> editar(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO) {
+        try {
+            FuncionarioResponse  clienteEditadoResponse = funcionarioService.editar(id, funcionarioDTO);
+
+            Response<FuncionarioResponse> response = new Response<>(
+                    "Sucesso",
+                    "Dados do funcionário editados com sucesso!",
+                    LocalDateTime.now(),
+                    clienteEditadoResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            Response<FuncionarioResponse> response = new Response<>(
+                    "Erro",
+                    e.getMessage(),
+                    LocalDateTime.now(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Response<Void>> deletar(@PathVariable Long id) {
+        try {
+            funcionarioService.deletar(id);
+
+            Response<Void> response = new Response<>(
+                    "Sucesso",
+                    "Funcionário deletado com sucesso!",
+                    LocalDateTime.now()
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        } catch (Exception e) {
+            Response<Void> response = new Response<>(
+                    "Erro",
+                    e.getMessage(),
+                    LocalDateTime.now()
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
 }
