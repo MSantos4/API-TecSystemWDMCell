@@ -102,7 +102,7 @@ public class ClienteController {
 
             Response<ClienteResponse> response = new Response<>(
                     "Sucesso",
-                    "Cliente encontrado com sucesso!",
+                    "Dados do cliente editado com sucesso!",
                     LocalDateTime.now(),
                     clienteEditadoResponse
             );

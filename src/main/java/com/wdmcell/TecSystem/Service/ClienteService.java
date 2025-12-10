@@ -75,7 +75,7 @@ public class ClienteService {
         Optional<Cliente> clienteEditar = clienteRepository.findById(id);
 
         if (clienteEditar.isEmpty()) {
-            throw new RuntimeException("Erro ao tentar cadastrar");
+            throw new RuntimeException("Erro ao tentar editar dados do cliente");
         } else {
             Cliente cliente = clienteEditar.get();
 
@@ -98,7 +98,7 @@ public class ClienteService {
 
     public void deletar(Long id) {
         if (!clienteRepository.existsById(id)) {
-            throw new RuntimeException("Cliente não encontrado");
+            throw new RuntimeException("Cliente não existe");
         }
         clienteRepository.deleteById(id);
     }
