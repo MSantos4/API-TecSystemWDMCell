@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -20,6 +21,7 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<Response<ClienteResponse>> salvar(@RequestBody ClienteDTO clienteDTO) {
+
         try {
             ClienteResponse clienteResponse = clienteService.salvar(clienteDTO);
 
@@ -43,6 +45,30 @@ public class ClienteController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<Response<List<ClienteResponse>>> buscarClientes() {
+        try {
+            List<ClienteResponse> clientesResponse = clienteService.buscarClientes();
+
+            Response<List<ClienteResponse>> response = new Response<>(
+                    "Sucesso",
+                    "Cliente encontrado com sucesso!",
+                    LocalDateTime.now(),
+                    clientesResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            Response<List<ClienteResponse>> response = new Response<>(
+                    "Erro",
+                    e.getMessage(),
+                    LocalDateTime.now(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<Response<ClienteResponse>> buscarCliente(@PathVariable Long id) {
         try {
@@ -60,12 +86,36 @@ public class ClienteController {
         } catch (Exception e) {
             Response<ClienteResponse> response = new Response<>(
                     "Erro",
-                    "Cliente não encontrado: " + e.getMessage(),
+                    e.getMessage(),
                     LocalDateTime.now(),
                     null
             );
 
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+    @PutMapping
+    public ResponseEntity<Response<ClienteResponse>> editar(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
+        try {
+            ClienteResponse  clienteEditadoResponse = clienteService.editar(id, clienteDTO);
+
+            Response<ClienteResponse> response = new Response<>(
+                    "Sucesso",
+                    "Cliente encontrado com sucesso!",
+                    LocalDateTime.now(),
+                    clienteEditadoResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            Response<ClienteResponse> response = new Response<>(
+                    "Erro",
+                    e.getMessage(),
+                    LocalDateTime.now(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 
@@ -85,7 +135,7 @@ public class ClienteController {
         } catch (Exception e) {
             Response<Void> response = new Response<>(
                     "Erro",
-                    "Erro ao deletar cliente: " + e.getMessage(),
+                     e.getMessage(),
                     LocalDateTime.now()
             );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
