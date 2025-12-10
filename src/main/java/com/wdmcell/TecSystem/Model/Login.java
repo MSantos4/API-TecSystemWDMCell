@@ -25,4 +25,7 @@ public class Login {
     
     @OneToOne @JoinColumn(name = "id_funcionario")
     private Funcionario funcionario;
+
+    public Login(String usuario, String senha, String nivelPermissao) {
+    }
 }

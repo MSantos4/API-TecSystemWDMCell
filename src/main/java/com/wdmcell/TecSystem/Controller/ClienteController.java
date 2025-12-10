@@ -21,7 +21,6 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<Response<ClienteResponse>> salvar(@RequestBody ClienteDTO clienteDTO) {
-
         try {
             ClienteResponse clienteResponse = clienteService.salvar(clienteDTO);
 

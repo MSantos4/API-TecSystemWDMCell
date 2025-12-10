@@ -25,4 +25,7 @@ public class Funcionario {
     
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     List<Pedido> pedidos;
+
+    public Funcionario(String nome, String matricula, String cpf) {
+    }
 }
