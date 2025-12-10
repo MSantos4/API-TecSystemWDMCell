@@ -1,6 +1,7 @@
 package com.wdmcell.TecSystem.Repository;
 
 import com.wdmcell.TecSystem.DTO.EstoqueDTO;
+import com.wdmcell.TecSystem.DTO.MarcaDTO;
 import com.wdmcell.TecSystem.Model.Produto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,4 +12,7 @@ import java.util.List;
 public interface ProdutoRepository extends JpaRepository<Produto , Long> {
     @Query("SELECT new com.wdmcell.TecSystem.DTO.EstoqueDTO(p.modelo, p.estoque) FROM Produto p")
     List<EstoqueDTO> listarEstoque();
+
+    @Query("SELECT new com.wdmcell.Tecsystem.DTO.MarcaDTO(p.marca) FROM Produto p")
+    List<MarcaDTO> listarMarcas();
 }

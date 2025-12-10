@@ -2,6 +2,7 @@ package com.wdmcell.TecSystem.Service;
 
 import com.wdmcell.TecSystem.DTO.ClienteDTO;
 import com.wdmcell.TecSystem.DTO.EstoqueDTO;
+import com.wdmcell.TecSystem.DTO.MarcaDTO;
 import com.wdmcell.TecSystem.DTO.ProdutoDTO;
 import com.wdmcell.TecSystem.DTO.Response.ClienteResponse;
 import com.wdmcell.TecSystem.DTO.Response.ProdutoResponse;
@@ -168,5 +169,9 @@ public class ProdutoService {
 
     public  List<EstoqueDTO> buscarEstoque() {
         return produtoRepository.listarEstoque();
+    }
+
+    public List<MarcaDTO> buscarMarcas() {
+        return produtoRepository.listarMarcas();
     }
 }

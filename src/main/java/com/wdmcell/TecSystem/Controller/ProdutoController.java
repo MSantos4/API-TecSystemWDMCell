@@ -1,6 +1,7 @@
 package com.wdmcell.TecSystem.Controller;
 
 import com.wdmcell.TecSystem.DTO.EstoqueDTO;
+import com.wdmcell.TecSystem.DTO.MarcaDTO;
 import com.wdmcell.TecSystem.DTO.ProdutoDTO;
 import com.wdmcell.TecSystem.DTO.Response.ProdutoResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
@@ -84,7 +85,7 @@ public class ProdutoController {
         } catch (Exception e) {
             Response<List<EstoqueDTO>> response = new Response<>(
                     "Erro",
-                   " Estoque não encotrado",
+                   " Estoque não encontrado",
                     LocalDateTime.now(),
                     null
             );
@@ -92,6 +93,29 @@ public class ProdutoController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<Response<List<MarcaDTO>>> listarMarcas() {
+        try {
+            List<MarcaDTO> clientesResponse = produtoService.buscarMarcas();
+
+            Response<List<MarcaDTO>> response = new Response<>(
+                    "Sucesso",
+                    "Marcas encontradas",
+                    LocalDateTime.now(),
+                    clientesResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            Response<List<MarcaDTO>> response = new Response<>(
+                    "Erro",
+                    "Marcas não encontradas",
+                    LocalDateTime.now(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
 
     @PutMapping
     public ResponseEntity<Response<ProdutoResponse>> editar(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
