@@ -3,9 +3,6 @@ package com.wdmcell.TecSystem.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -25,6 +22,9 @@ public class Especificacao {
     
     @OneToOne @JoinColumn(name = "id_produto")
     private Produto produto;
+
+    public Especificacao() {
+    }
 
     public Especificacao(String tela, String processador, String armazenamento, String memoria, String bateria, String sistema, Double espessura, Double peso) {
     }

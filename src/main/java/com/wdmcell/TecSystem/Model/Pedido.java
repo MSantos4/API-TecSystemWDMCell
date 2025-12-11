@@ -6,9 +6,6 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -28,4 +25,13 @@ public class Pedido {
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itensPedido;
 
+    public Pedido() {
+    }
+
+    public Pedido(LocalDate data, Funcionario funcionario, Cliente cliente, List<ItemPedido> itensPedido) {
+        this.data = data;
+        this.funcionario = funcionario;
+        this.cliente = cliente;
+        this.itensPedido = itensPedido;
+    }
 }

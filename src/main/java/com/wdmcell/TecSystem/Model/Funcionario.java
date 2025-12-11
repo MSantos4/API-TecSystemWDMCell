@@ -5,9 +5,6 @@ import lombok.*;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -25,6 +22,9 @@ public class Funcionario {
     
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL)
     List<Pedido> pedidos;
+
+    public Funcionario() {
+    }
 
     public Funcionario(String nome, String matricula, String cpf) {
     }

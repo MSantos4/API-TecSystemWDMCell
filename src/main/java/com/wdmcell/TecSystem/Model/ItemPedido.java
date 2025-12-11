@@ -3,9 +3,6 @@ package com.wdmcell.TecSystem.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -24,4 +21,14 @@ public class ItemPedido {
     
     @ManyToOne @JoinColumn(name = "id_caixa")
     private Caixa caixa;
+
+    public ItemPedido() {
+    }
+
+    public ItemPedido(int quantidade, Produto produto, Pedido pedido, Caixa caixa) {
+        this.quantidade = quantidade;
+        this.produto = produto;
+        this.pedido = pedido;
+        this.caixa = caixa;
+    }
 }

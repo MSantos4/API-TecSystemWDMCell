@@ -3,9 +3,7 @@ package com.wdmcell.TecSystem.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
+
 @Getter
 @Setter
 @Entity
@@ -22,6 +20,9 @@ public class Produto {
     
     @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
     private Especificacao especificacao;
+
+    public Produto() {
+    }
 
     public Produto(String marca, String modelo, Double precoCompra, Double precoVenda, int estoque, Especificacao especificacao) {
     }

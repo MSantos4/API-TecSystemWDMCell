@@ -6,9 +6,6 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -23,4 +20,14 @@ public class Caixa {
     
     @OneToMany(mappedBy = "caixa", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<ItemPedido> itensDePedido;
+
+    public Caixa(String tipo_transacao, Double valor, LocalDate data_transacao, List<ItemPedido> itensDePedido) {
+        this.tipo_transacao = tipo_transacao;
+        this.valor = valor;
+        this.data_transacao = data_transacao;
+        this.itensDePedido = itensDePedido;
+    }
+
+    public Caixa() {
+    }
 }

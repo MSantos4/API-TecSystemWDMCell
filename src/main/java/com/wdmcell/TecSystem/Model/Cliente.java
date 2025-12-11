@@ -5,9 +5,6 @@ import lombok.*;
 
 import java.util.List;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@RequiredArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -22,6 +19,9 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     List<Pedido> pedidos;
+
+    public Cliente() {
+    }
 
     public Cliente(String nome, String cpf, String email, String telefone) {
     }
