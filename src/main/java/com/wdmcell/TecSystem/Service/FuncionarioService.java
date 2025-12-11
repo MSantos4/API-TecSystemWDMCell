@@ -30,6 +30,10 @@ public class FuncionarioService {
                 funcionarioDTO.getMatricula(),
                 funcionarioDTO.getCpf()
         );
+
+        funcionario.setLogin(login);
+        login.setFuncionario(funcionario);
+
         funcionario.setLogin(login);
 
         Funcionario funcionarioCadastrado = funcionarioRepository.save(funcionario);
@@ -89,7 +93,7 @@ public class FuncionarioService {
             funcionario.setMatricula(funcionarioDTO.getMatricula());
             funcionario.setCpf(funcionarioDTO.getCpf());
             funcionario.getLogin().setUsuario(funcionarioDTO.getUsuario());
-            funcionario.getLogin().setUsuario(funcionarioDTO.getSenha());
+            funcionario.getLogin().setSenha(funcionarioDTO.getSenha());
             funcionario.getLogin().setNivel_permissao(funcionarioDTO.getNivel_permissao());
 
             Funcionario funcionarioEditado = funcionarioRepository.save(funcionario);

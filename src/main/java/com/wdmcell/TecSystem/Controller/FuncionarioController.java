@@ -4,7 +4,6 @@ import com.wdmcell.TecSystem.DTO.FuncionarioDTO;
 import com.wdmcell.TecSystem.DTO.Response.FuncionarioResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.FuncionarioService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

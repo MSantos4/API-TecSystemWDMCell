@@ -3,6 +3,7 @@ package com.wdmcell.TecSystem.Controller;
 import com.wdmcell.TecSystem.DTO.EstoqueDTO;
 import com.wdmcell.TecSystem.DTO.MarcaDTO;
 import com.wdmcell.TecSystem.DTO.ProdutoDTO;
+import com.wdmcell.TecSystem.DTO.Response.ClienteResponse;
 import com.wdmcell.TecSystem.DTO.Response.ProdutoResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.ProdutoService;
@@ -50,7 +51,7 @@ public class ProdutoController {
     @GetMapping
     public ResponseEntity<Response<List<ProdutoResponse>>> buscarProdutos() {
         try {
-            List<ProdutoResponse> produtosResponse = produtoService.buscarClientes();
+            List<ProdutoResponse> produtosResponse = produtoService.buscarProdutos();
 
             Response<List<ProdutoResponse>> response = new Response<>(
                     "Sucesso",
@@ -62,6 +63,31 @@ public class ProdutoController {
             return ResponseEntity.status(HttpStatus.OK).body(response);
         } catch (Exception e) {
             Response<List<ProdutoResponse>> response = new Response<>(
+                    "Erro",
+                    e.getMessage(),
+                    LocalDateTime.now(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
+        }
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Response<ProdutoResponse>> buscarProduto(@PathVariable Long id) {
+        try {
+            ProdutoResponse clienteResponse = produtoService.buscarPorId(id);
+
+            Response<ProdutoResponse> response = new Response<>(
+                    "Sucesso",
+                    "Produto encontrado com sucesso!",
+                    LocalDateTime.now(),
+                    clienteResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+
+        } catch (Exception e) {
+            Response<ProdutoResponse> response = new Response<>(
                     "Erro",
                     e.getMessage(),
                     LocalDateTime.now(),
@@ -119,7 +145,7 @@ public class ProdutoController {
         }
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     public ResponseEntity<Response<ProdutoResponse>> editar(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
         try {
             ProdutoResponse produtoEditadoResponse = produtoService.editar(id, produtoDTO);

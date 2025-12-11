@@ -96,7 +96,7 @@ public class ClienteController {
         }
     }
 
-    @PutMapping
+    @PutMapping("{id}")
     public ResponseEntity<Response<ClienteResponse>> editar(@PathVariable Long id, @RequestBody ClienteDTO clienteDTO) {
         try {
             ClienteResponse  clienteEditadoResponse = clienteService.editar(id, clienteDTO);

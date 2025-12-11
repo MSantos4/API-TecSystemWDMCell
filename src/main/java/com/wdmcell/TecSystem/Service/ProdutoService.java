@@ -44,6 +44,9 @@ public class ProdutoService {
                 especificacao
         );
 
+        produto.setEspecificacao(especificacao);
+        especificacao.setProduto(produto);
+
         Produto produtoCadastrado = produtoRepository.save(produto);
 
         return new ProdutoResponse(
@@ -64,7 +67,7 @@ public class ProdutoService {
         );
     }
 
-    public List<ProdutoResponse> buscarClientes() {
+    public List<ProdutoResponse> buscarProdutos() {
         List<Produto> produtos = produtoRepository.findAll();
         List<ProdutoResponse> responseProdutos = new ArrayList<>();
 
