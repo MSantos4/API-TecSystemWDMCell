@@ -20,6 +20,30 @@ public class FuncionarioDTO {
     public FuncionarioDTO() {
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public void setNivel_permissao(String nivel_permissao) {
+        this.nivel_permissao = nivel_permissao;
+    }
+
     public String getNome() {
         return nome;
     }

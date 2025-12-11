@@ -24,6 +24,12 @@ public class Produto {
     public Produto() {
     }
 
-    public Produto(String marca, String modelo, Double precoCompra, Double precoVenda, int estoque, Especificacao especificacao) {
+    public Produto(String marca, String modelo, Double preco_compra, Double preco_venda, int estoque, Especificacao especificacao) {
+        this.marca = marca;
+        this.modelo = modelo;
+        this.preco_compra = preco_compra;
+        this.preco_venda = preco_venda;
+        this.estoque = estoque;
+        this.especificacao = especificacao;
     }
 }

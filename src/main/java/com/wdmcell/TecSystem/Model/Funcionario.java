@@ -27,5 +27,8 @@ public class Funcionario {
     }
 
     public Funcionario(String nome, String matricula, String cpf) {
+        this.nome = nome;
+        this.matricula = matricula;
+        this.cpf = cpf;
     }
 }

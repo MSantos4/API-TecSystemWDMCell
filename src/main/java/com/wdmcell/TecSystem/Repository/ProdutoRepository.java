@@ -13,6 +13,6 @@ public interface ProdutoRepository extends JpaRepository<Produto , Long> {
     @Query("SELECT new com.wdmcell.TecSystem.DTO.EstoqueDTO(p.modelo, p.estoque) FROM Produto p")
     List<EstoqueDTO> listarEstoque();
 
-    @Query("SELECT new com.wdmcell.Tecsystem.DTO.MarcaDTO(p.marca) FROM Produto p")
+    @Query("SELECT new com.wdmcell.TecSystem.DTO.MarcaDTO(p.marca) FROM Produto p")
     List<MarcaDTO> listarMarcas();
 }

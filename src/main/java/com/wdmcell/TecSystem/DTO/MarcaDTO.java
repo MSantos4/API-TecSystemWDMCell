@@ -11,7 +11,7 @@ public class MarcaDTO {
         return marca;
     }
 
-    public void setString(String marca) {
+    public void setMarca(String marca) {
         this.marca = marca;
     }
 }

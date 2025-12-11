@@ -20,4 +20,39 @@ public class Response<T> {
         this.messagem = messagem;
         this.timestamp = timestamp;
     }
+
+    public Response() {
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMessagem() {
+        return messagem;
+    }
+
+    public void setMessagem(String messagem) {
+        this.messagem = messagem;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
 }

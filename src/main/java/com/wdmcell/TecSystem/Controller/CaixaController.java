@@ -1,12 +1,10 @@
 package com.wdmcell.TecSystem.Controller;
 
-import com.wdmcell.TecSystem.DTO.Response.ClienteResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.DTO.Response.UltimaVendaResponse;
 import com.wdmcell.TecSystem.DTO.Response.VendaResponse;
 import com.wdmcell.TecSystem.DTO.VendaDTO;
 import com.wdmcell.TecSystem.Service.VendaService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 
-@RequiredArgsConstructor
 @RestController("caixa")
 public class CaixaController {
     private final VendaService vendaService;
+
+    public CaixaController(VendaService vendaService) {
+        this.vendaService = vendaService;
+    }
 
     @PostMapping
     public ResponseEntity<Response<VendaResponse>> salvar(@RequestBody  VendaDTO vendaDTO) {

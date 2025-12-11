@@ -2,7 +2,6 @@ package com.wdmcell.TecSystem.Controller;
 
 import com.wdmcell.TecSystem.DTO.LoginDTO;
 import com.wdmcell.TecSystem.DTO.LoginResponseDTO;
-import com.wdmcell.TecSystem.DTO.Response.FuncionarioResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.LoginService;
 import jakarta.servlet.http.Cookie;
@@ -17,11 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@RequiredArgsConstructor
 @RestController
 public class LoginController {
 
     private final LoginService loginService;
+
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<Response<LoginResponseDTO>> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {

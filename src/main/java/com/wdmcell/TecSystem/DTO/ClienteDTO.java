@@ -16,6 +16,22 @@ public class ClienteDTO {
     public ClienteDTO() {
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getNome() {
         return nome;
     }

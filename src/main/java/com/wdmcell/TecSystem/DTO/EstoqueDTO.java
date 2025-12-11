@@ -12,6 +12,8 @@ public class EstoqueDTO {
         this.estoque = estoque;
     }
 
+
+
     public String getModelo() {
         return modelo;
     }

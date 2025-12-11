@@ -6,7 +6,6 @@ import com.wdmcell.TecSystem.DTO.ProdutoDTO;
 import com.wdmcell.TecSystem.DTO.Response.ProdutoResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.ProdutoService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +13,15 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RequiredArgsConstructor
 @RestController
 @RequestMapping("produtos")
 public class ProdutoController {
 
     private final ProdutoService produtoService;
+
+    public ProdutoController(ProdutoService produtoService) {
+        this.produtoService = produtoService;
+    }
 
     @PostMapping
     public ResponseEntity<Response<ProdutoResponse>> salvar(@RequestBody ProdutoDTO produtoDTO) {
@@ -69,7 +71,7 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/estoque")
     public ResponseEntity<Response<List<EstoqueDTO>>> listarEstoque() {
         try {
             List<EstoqueDTO> clientesResponse = produtoService.buscarEstoque();
@@ -93,7 +95,7 @@ public class ProdutoController {
         }
     }
 
-    @GetMapping
+    @GetMapping("marcas")
     public ResponseEntity<Response<List<MarcaDTO>>> listarMarcas() {
         try {
             List<MarcaDTO> clientesResponse = produtoService.buscarMarcas();

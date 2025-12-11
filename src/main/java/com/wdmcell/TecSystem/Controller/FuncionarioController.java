@@ -12,12 +12,16 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RequiredArgsConstructor
+
 @RestController
 @RequestMapping("funcionarios")
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
+
+    public FuncionarioController(FuncionarioService funcionarioService) {
+        this.funcionarioService = funcionarioService;
+    }
 
     @PostMapping
     public ResponseEntity<Response<FuncionarioResponse>> salvar(@RequestBody FuncionarioDTO funcionarioDTO) {

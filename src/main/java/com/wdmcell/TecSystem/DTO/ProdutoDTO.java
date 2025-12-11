@@ -82,4 +82,56 @@ public class ProdutoDTO {
     public Double getPeso() {
         return peso;
     }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
+    public void setPreco_compra(Double preco_compra) {
+        this.preco_compra = preco_compra;
+    }
+
+    public void setPreco_venda(Double preco_venda) {
+        this.preco_venda = preco_venda;
+    }
+
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+
+    public void setTela(String tela) {
+        this.tela = tela;
+    }
+
+    public void setProcessador(String processador) {
+        this.processador = processador;
+    }
+
+    public void setArmazenamento(String armazenamento) {
+        this.armazenamento = armazenamento;
+    }
+
+    public void setMemoria(String memoria) {
+        this.memoria = memoria;
+    }
+
+    public void setBateria(String bateria) {
+        this.bateria = bateria;
+    }
+
+    public void setSistema(String sistema) {
+        this.sistema = sistema;
+    }
+
+    public void setEspessura(Double espessura) {
+        this.espessura = espessura;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
 }

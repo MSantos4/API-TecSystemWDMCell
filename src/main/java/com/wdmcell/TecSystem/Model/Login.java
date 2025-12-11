@@ -26,6 +26,9 @@ public class Login {
     public Login() {
     }
 
-    public Login(String usuario, String senha, String nivelPermissao) {
+    public Login(String usuario, String senha, String nivel_permissao) {
+        this.usuario = usuario;
+        this.senha = senha;
+        this.nivel_permissao = nivel_permissao;
     }
 }

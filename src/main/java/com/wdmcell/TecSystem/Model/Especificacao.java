@@ -27,5 +27,13 @@ public class Especificacao {
     }
 
     public Especificacao(String tela, String processador, String armazenamento, String memoria, String bateria, String sistema, Double espessura, Double peso) {
+        this.tela = tela;
+        this.processador = processador;
+        this.armazenamento = armazenamento;
+        this.memoria = memoria;
+        this.bateria = bateria;
+        this.sistema = sistema;
+        this.espessura = espessura;
+        this.peso = peso;
     }
 }
