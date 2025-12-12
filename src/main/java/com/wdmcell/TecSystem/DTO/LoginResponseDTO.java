@@ -10,7 +10,8 @@ public class LoginResponseDTO {
     public LoginResponseDTO() {
     }
 
-    public LoginResponseDTO(String nome, String nivel_permissao, String matricula) {
+    public LoginResponseDTO(Long id, String nome, String nivel_permissao, String matricula) {
+        this.id = id;
         this.nome = nome;
         this.nivel_permissao = nivel_permissao;
         this.matricula = matricula;

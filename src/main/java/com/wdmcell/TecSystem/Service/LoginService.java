@@ -17,6 +17,7 @@ public class LoginService {
 
        if (funcionario != null) {
            return new LoginResponseDTO(
+                   funcionario.getId(),
                    funcionario.getNome(),
                    funcionario.getLogin().getNivel_permissao(),
                    funcionario.getMatricula()

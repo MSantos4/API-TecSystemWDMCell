@@ -48,13 +48,13 @@ public class FuncionarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Response<List<FuncionarioResponse>>> buscarClientes() {
+    public ResponseEntity<Response<List<FuncionarioResponse>>> buscarFuncionarios() {
         try {
             List<FuncionarioResponse> funcionarioResponse = funcionarioService.buscarFuncionarios();
 
             Response<List<FuncionarioResponse>> response = new Response<>(
                     "Sucesso",
-                    "Funcionário encontrado com sucesso!",
+                    "Funcionários encontrados com sucesso!",
                     LocalDateTime.now(),
                     funcionarioResponse
             );
@@ -72,15 +72,15 @@ public class FuncionarioController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Response<FuncionarioResponse>> buscarCliente(@PathVariable Long id) {
+    public ResponseEntity<Response<FuncionarioResponse>> buscarFuncionario(@PathVariable Long id) {
         try {
-            FuncionarioResponse clienteResponse = funcionarioService.buscarPorId(id);
+            FuncionarioResponse funcionarioResponse = funcionarioService.buscarPorId(id);
 
             Response<FuncionarioResponse> response = new Response<>(
                     "Sucesso",
                     "Funcionário encontrado com sucesso!",
                     LocalDateTime.now(),
-                    clienteResponse
+                    funcionarioResponse
             );
 
             return ResponseEntity.status(HttpStatus.OK).body(response);
@@ -100,13 +100,13 @@ public class FuncionarioController {
     @PutMapping("/{id}")
     public ResponseEntity<Response<FuncionarioResponse>> editar(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO) {
         try {
-            FuncionarioResponse  clienteEditadoResponse = funcionarioService.editar(id, funcionarioDTO);
+            FuncionarioResponse  funcionarioEditadoResponse = funcionarioService.editar(id, funcionarioDTO);
 
             Response<FuncionarioResponse> response = new Response<>(
                     "Sucesso",
                     "Dados do funcionário editados com sucesso!",
                     LocalDateTime.now(),
-                    clienteEditadoResponse
+                    funcionarioEditadoResponse
             );
 
             return ResponseEntity.status(HttpStatus.OK).body(response);

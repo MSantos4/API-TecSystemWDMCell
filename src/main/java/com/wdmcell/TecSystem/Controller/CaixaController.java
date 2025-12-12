@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
 @RestController
-@RequestMapping("caixa")
+@RequestMapping("caixa ")
 public class CaixaController {
     private final VendaService vendaService;
 
