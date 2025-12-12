@@ -18,7 +18,7 @@ public class Caixa {
     private Double valor;
     private LocalDate data_transacao;
     
-    @OneToMany(mappedBy = "caixa", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = "caixa", cascade = {CascadeType.MERGE, CascadeType.ALL})
     private List<ItemPedido> itensDePedido;
 
     public Caixa(String tipo_transacao, Double valor, LocalDate data_transacao, List<ItemPedido> itensDePedido) {

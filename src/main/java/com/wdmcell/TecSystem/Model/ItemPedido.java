@@ -16,7 +16,7 @@ public class ItemPedido {
     @ManyToOne @JoinColumn(name = "id_produto")
     private Produto produto;
     
-    @ManyToOne @JoinColumn(name = "id_pedido")
+    @ManyToOne(cascade = CascadeType.ALL) @JoinColumn(name = "id_pedido")
     private Pedido pedido;
     
     @ManyToOne @JoinColumn(name = "id_caixa")

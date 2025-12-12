@@ -7,7 +7,9 @@ import com.wdmcell.TecSystem.DTO.VendaDTO;
 import com.wdmcell.TecSystem.Model.*;
 import com.wdmcell.TecSystem.Repository.CaixaRepository;
 import com.wdmcell.TecSystem.Repository.ClienteRepository;
+import com.wdmcell.TecSystem.Repository.FuncionarioRepository;
 import com.wdmcell.TecSystem.Repository.ProdutoRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,58 +24,68 @@ public class VendaService {
 
     private final ClienteRepository clienteRepository;
     private final ProdutoRepository produtoRepository;
+    private final FuncionarioRepository funcionarioRepository;
     private final CaixaRepository caixaRepository;
 
+    @Transactional
     public VendaResponse cadastrarVenda(VendaDTO vendaDTO) {
 
+        // Criar pedido
         Pedido pedido = new Pedido();
         pedido.setData(LocalDate.now());
-        Optional<Cliente> cliente = clienteRepository.findById(vendaDTO.getPedido().getClienteId());
-        cliente.ifPresent(pedido::setCliente);
+
+        Cliente cliente = clienteRepository.findById(vendaDTO.getPedido().getClienteId())
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        System.out.println(cliente.getNome());
+        pedido.setCliente(cliente);
+
+        Funcionario funcionario = funcionarioRepository.findById(vendaDTO.getPedido().getFuncionarioId())
+                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
+        System.out.println(funcionario.getNome());
+        pedido.setFuncionario(funcionario);
+
+        // Criar caixa
+        Caixa caixa = new Caixa();
+        caixa.setData_transacao(LocalDate.now());
+        caixa.setTipo_transacao(vendaDTO.getCaixa().getTipoTransacao());
 
         List<ItemPedido> itens = new ArrayList<>();
         double valorTotal = 0.0;
 
         for (ItemPedidoDTO itemDTO : vendaDTO.getPedido().getItens()) {
-            Optional<Produto> produto = produtoRepository.findById(itemDTO.getProdutoId());
 
-            if (produto.isPresent()) {
-                Produto produtoCadastrar = produto.get();
-                ItemPedido item = new ItemPedido();
-                item.setProduto(produtoCadastrar);
-                item.setQuantidade(itemDTO.getQuantidade());
-                item.setPedido(pedido);
-                itens.add(item);
+            Produto produto = produtoRepository.findById(itemDTO.getProdutoId())
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
-                valorTotal += produtoCadastrar.getPreco_venda() * itemDTO.getQuantidade();
-            }
+            ItemPedido item = new ItemPedido();
+            item.setProduto(produto);
+            item.setQuantidade(itemDTO.getQuantidade());
+
+            item.setPedido(pedido);
+            item.setCaixa(caixa);
+
+            itens.add(item);
+
+            valorTotal += produto.getPreco_venda() * itemDTO.getQuantidade();
         }
 
         pedido.setItensPedido(itens);
-
-        Caixa caixa = new Caixa();
-        caixa.setData_transacao(LocalDate.now());
-        caixa.setTipo_transacao(vendaDTO.getCaixa().getTipoTransacao());
-
-        //Aplicando desconto no valor final
-        valorTotal = valorTotal - (valorTotal * (vendaDTO.getCaixa().getDesconto()/100));
-        caixa.setValor(valorTotal);
-
         caixa.setItensDePedido(itens);
-        itens.forEach(item -> item.setCaixa(caixa));
+
+        valorTotal = valorTotal - (valorTotal * (vendaDTO.getCaixa().getDesconto() / 100));
+        caixa.setValor(valorTotal);
 
         Caixa vendaCadastrada = caixaRepository.save(caixa);
 
-        int quantidadeIntens = 0;
-
-        for (ItemPedido itemPedido : vendaCadastrada.getItensDePedido()) {
-            quantidadeIntens = quantidadeIntens + itemPedido.getQuantidade();
-        }
+        int quantidadeItens = vendaCadastrada.getItensDePedido()
+                .stream()
+                .mapToInt(ItemPedido::getQuantidade)
+                .sum();
 
         return new VendaResponse(
                 vendaCadastrada.getId(),
-                vendaCadastrada.getItensDePedido().get(1).getPedido().getCliente().getNome(),
-                quantidadeIntens,
+                cliente.getNome(),
+                quantidadeItens,
                 vendaCadastrada.getValor()
         );
     }

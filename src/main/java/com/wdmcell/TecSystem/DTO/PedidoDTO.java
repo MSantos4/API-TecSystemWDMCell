@@ -7,6 +7,15 @@ public class PedidoDTO {
     private Long funcionarioId;
     private List<ItemPedidoDTO> itens;
 
+    public PedidoDTO(Long clienteId, Long funcionarioId, List<ItemPedidoDTO> itens) {
+        this.clienteId = clienteId;
+        this.funcionarioId = funcionarioId;
+        this.itens = itens;
+    }
+
+    public PedidoDTO() {
+    }
+
     public Long getClienteId() {
         return clienteId;
     }

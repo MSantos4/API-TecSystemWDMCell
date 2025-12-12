@@ -4,6 +4,14 @@ public class ItemPedidoDTO {
     private Long produtoId;
     private int quantidade;
 
+    public ItemPedidoDTO(Long produtoId, int quantidade) {
+        this.produtoId = produtoId;
+        this.quantidade = quantidade;
+    }
+
+    public ItemPedidoDTO() {
+    }
+
     public Long getProdutoId() {
         return produtoId;
     }

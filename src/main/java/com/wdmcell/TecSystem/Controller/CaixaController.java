@@ -7,14 +7,12 @@ import com.wdmcell.TecSystem.DTO.VendaDTO;
 import com.wdmcell.TecSystem.Service.VendaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
-@RestController("caixa")
+@RestController
+@RequestMapping("caixa")
 public class CaixaController {
     private final VendaService vendaService;
 
