@@ -4,6 +4,7 @@ import com.wdmcell.TecSystem.DTO.FuncionarioDTO;
 import com.wdmcell.TecSystem.DTO.Response.FuncionarioResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.FuncionarioService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,16 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("funcionarios")
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;
-
-    public FuncionarioController(FuncionarioService funcionarioService) {
-        this.funcionarioService = funcionarioService;
-    }
 
     @PostMapping
     public ResponseEntity<Response<FuncionarioResponse>> salvar(@RequestBody FuncionarioDTO funcionarioDTO) {

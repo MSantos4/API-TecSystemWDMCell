@@ -6,6 +6,7 @@ import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.LoginService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,14 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @RestController
 public class LoginController {
 
     private final LoginService loginService;
-
-    public LoginController(LoginService loginService) {
-        this.loginService = loginService;
-    }
 
     @PostMapping("/login")
     public ResponseEntity<Response<LoginResponseDTO>> login(@RequestBody LoginDTO loginDTO, HttpServletResponse response) {
@@ -36,9 +34,7 @@ public class LoginController {
                     LocalDateTime.now(),
                     null
             );
-
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(loginResponse);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(loginResponse);
         }
 
         String token = UUID.randomUUID().toString();

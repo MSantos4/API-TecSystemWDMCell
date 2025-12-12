@@ -5,20 +5,18 @@ import com.wdmcell.TecSystem.DTO.Response.UltimaVendaResponse;
 import com.wdmcell.TecSystem.DTO.Response.VendaResponse;
 import com.wdmcell.TecSystem.DTO.VendaDTO;
 import com.wdmcell.TecSystem.Service.VendaService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("caixa ")
 public class CaixaController {
     private final VendaService vendaService;
-
-    public CaixaController(VendaService vendaService) {
-        this.vendaService = vendaService;
-    }
 
     @PostMapping
     public ResponseEntity<Response<VendaResponse>> salvar(@RequestBody  VendaDTO vendaDTO) {

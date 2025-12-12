@@ -6,6 +6,8 @@ import com.wdmcell.TecSystem.Model.Funcionario;
 import com.wdmcell.TecSystem.Model.Login;
 import com.wdmcell.TecSystem.Repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -18,10 +20,16 @@ public class FuncionarioService {
 
     private final FuncionarioRepository funcionarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public FuncionarioResponse salvar(FuncionarioDTO funcionarioDTO) {
+
+        String senhaHash = passwordEncoder.encode(funcionarioDTO.getSenha());
+
         Login login = new Login (
                 funcionarioDTO.getUsuario(),
-                funcionarioDTO.getSenha(),
+                senhaHash,
                 funcionarioDTO.getNivel_permissao()
         );
 
