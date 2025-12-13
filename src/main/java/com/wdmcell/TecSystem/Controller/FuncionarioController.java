@@ -4,6 +4,7 @@ import com.wdmcell.TecSystem.DTO.FuncionarioDTO;
 import com.wdmcell.TecSystem.DTO.Response.FuncionarioResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.FuncionarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class FuncionarioController {
     private final FuncionarioService funcionarioService;
 
     @PostMapping
-    public ResponseEntity<Response<FuncionarioResponse>> salvar(@RequestBody FuncionarioDTO funcionarioDTO) {
+    public ResponseEntity<Response<FuncionarioResponse>> salvar(@RequestBody @Valid FuncionarioDTO funcionarioDTO) {
         try {
             FuncionarioResponse funcionarioResponse = funcionarioService.salvar(funcionarioDTO);
 
@@ -95,7 +96,7 @@ public class FuncionarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Response<FuncionarioResponse>> editar(@PathVariable Long id, @RequestBody FuncionarioDTO funcionarioDTO) {
+    public ResponseEntity<Response<FuncionarioResponse>> editar(@PathVariable Long id,  @RequestBody @Valid FuncionarioDTO funcionarioDTO) {
         try {
             FuncionarioResponse  funcionarioEditadoResponse = funcionarioService.editar(id, funcionarioDTO);
 

@@ -6,6 +6,7 @@ import com.wdmcell.TecSystem.DTO.ProdutoDTO;
 import com.wdmcell.TecSystem.DTO.Response.ProdutoResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.Service.ProdutoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class ProdutoController {
     private final ProdutoService produtoService;
 
     @PostMapping
-    public ResponseEntity<Response<ProdutoResponse>> salvar(@RequestBody ProdutoDTO produtoDTO) {
+    public ResponseEntity<Response<ProdutoResponse>> salvar(@RequestBody @Valid ProdutoDTO produtoDTO) {
         try {
             ProdutoResponse clienteResponse = produtoService.salvar(produtoDTO);
 
@@ -143,7 +144,7 @@ public class ProdutoController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Response<ProdutoResponse>> editar(@PathVariable Long id, @RequestBody ProdutoDTO produtoDTO) {
+    public ResponseEntity<Response<ProdutoResponse>> editar(@PathVariable Long id, @RequestBody @Valid ProdutoDTO produtoDTO) {
         try {
             ProdutoResponse produtoEditadoResponse = produtoService.editar(id, produtoDTO);
 
