@@ -14,7 +14,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("funcionarios")
+@RequestMapping("/funcionarios")
 public class FuncionarioController {
 
     private final FuncionarioService funcionarioService;

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("caixa ")
+@RequestMapping("/caixa")
 public class CaixaController {
     private final VendaService vendaService;
 
