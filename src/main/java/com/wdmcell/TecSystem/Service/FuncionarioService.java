@@ -47,6 +47,7 @@ public class FuncionarioService {
         Funcionario funcionarioCadastrado = funcionarioRepository.save(funcionario);
 
         return new FuncionarioResponse(
+                funcionarioCadastrado.getId(),
                 funcionarioCadastrado.getNome(),
                 funcionarioCadastrado.getMatricula(),
                 funcionarioCadastrado.getCpf(),
@@ -64,6 +65,7 @@ public class FuncionarioService {
         } else {
             for (Funcionario funcionario : funcionarios) {
                 FuncionarioResponse funcionarioResponse =  new FuncionarioResponse (
+                        funcionario.getId(),
                         funcionario.getNome(),
                         funcionario.getMatricula(),
                         funcionario.getCpf(),
@@ -81,6 +83,7 @@ public class FuncionarioService {
                 .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
 
         return new FuncionarioResponse(
+                funcionario.getId(),
                 funcionario.getNome(),
                 funcionario.getMatricula(),
                 funcionario.getCpf(),
@@ -107,6 +110,7 @@ public class FuncionarioService {
             Funcionario funcionarioEditado = funcionarioRepository.save(funcionario);
 
             return new FuncionarioResponse(
+                    funcionarioEditado.getId(),
                     funcionarioEditado.getNome(),
                     funcionarioEditado.getMatricula(),
                     funcionarioEditado.getCpf(),

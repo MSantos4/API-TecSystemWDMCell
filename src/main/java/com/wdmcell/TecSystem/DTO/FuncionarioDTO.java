@@ -1,11 +1,25 @@
 package com.wdmcell.TecSystem.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
+
 public class FuncionarioDTO {
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
+
+    @NotBlank(message = "matrícula é obrigatório")
     private String matricula;
+
+    @NotBlank(message = "CPF é obrigatório") @CPF(message = "Digite um CPF válido")
     private String cpf;
+
+    @NotBlank(message = "Usuário é obrigatório")
     private String usuario;
+
+    @NotBlank(message = "Senha é obrigatório")
     private String senha;
+
+    @NotBlank(message = "Nivel de permissão é obrigatório")
     private String nivel_permissao;
 
     public FuncionarioDTO(String nome, String matricula, String cpf, String usuario, String senha, String nivel_permissao) {

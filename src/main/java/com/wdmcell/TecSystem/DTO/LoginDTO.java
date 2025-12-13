@@ -1,7 +1,12 @@
 package com.wdmcell.TecSystem.DTO;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginDTO {
+    @NotBlank(message = "Usuário é obrigatório")
     private String usuario;
+
+    @NotBlank(message = "Senha é obrigatório")
     private String senha;
 
     public LoginDTO(String usuario, String senha) {

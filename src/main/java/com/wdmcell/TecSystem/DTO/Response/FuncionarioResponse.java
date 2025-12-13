@@ -1,13 +1,15 @@
 package com.wdmcell.TecSystem.DTO.Response;
 
 public class FuncionarioResponse {
+    private Long id;
     private String nome;
     private String matricula;
     private String cpf;
     private String usuario;
     private String nivel_permissao;
 
-    public FuncionarioResponse(String nome, String matricula, String cpf, String usuario, String nivel_permissao) {
+    public FuncionarioResponse(Long id, String nome, String matricula, String cpf, String usuario, String nivel_permissao) {
+        this.id = id;
         this.nome = nome;
         this.matricula = matricula;
         this.cpf = cpf;
@@ -16,6 +18,14 @@ public class FuncionarioResponse {
     }
 
     public FuncionarioResponse() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
