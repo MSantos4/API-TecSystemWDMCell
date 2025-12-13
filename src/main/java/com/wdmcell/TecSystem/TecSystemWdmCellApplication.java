@@ -9,5 +9,4 @@ public class TecSystemWdmCellApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TecSystemWdmCellApplication.class, args);
 	}
-
 }
