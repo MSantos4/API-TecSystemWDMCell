@@ -1,11 +1,6 @@
 package com.wdmcell.TecSystem.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
@@ -15,9 +10,12 @@ public class Login {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @Column(length = 100)
     private String usuario;
+    @Column(nullable = false)
     private String senha;
+    @Column(length =  10, nullable = false)
     private String nivel_permissao;
     
     @OneToOne @JoinColumn(name = "id_funcionario")
