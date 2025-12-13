@@ -10,12 +10,17 @@ public class Especificacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+    @Column(length = 100)
     private String tela;
+    @Column(length = 100)
     private String processador;
+    @Column(length = 20)
     private String armazenamento;
+    @Column(length = 20)
     private String memoria;
+    @Column(length = 20)
     private String bateria;
+    @Column(length = 50)
     private String sistema;
     private Double espessura;
     private Double peso;

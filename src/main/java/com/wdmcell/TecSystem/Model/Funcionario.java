@@ -12,11 +12,13 @@ public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @Column(length = 120, nullable = false)
     private String nome;
+    @Column(length = 10, nullable = false)
     private String matricula;
+    @Column(length = 14, unique = true, nullable = false)
     private String cpf;
-    
     @OneToOne(mappedBy = "funcionario", cascade = CascadeType.ALL)
     private Login login;
     

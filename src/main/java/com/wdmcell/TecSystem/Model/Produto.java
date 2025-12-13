@@ -11,11 +11,15 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
+    @Column(nullable = false, length = 50)
     private String marca;
+    @Column(nullable = false, length = 60)
     private String modelo;
+
     private Double preco_compra;
     private Double preco_venda;
+
     private int estoque;
     
     @OneToOne(mappedBy = "produto", cascade = CascadeType.ALL)
