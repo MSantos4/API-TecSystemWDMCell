@@ -13,8 +13,6 @@ public class CaixaDTO {
         this.valor = valor;
         this.desconto = desconto;
     }
-
-
     
     public Double getDesconto() {
         return desconto;

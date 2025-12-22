@@ -22,8 +22,8 @@ public class ClienteService {
         Cliente cliente = new Cliente(
                 clienteDTO.getNome(),
                 clienteDTO.getCpf(),
-                clienteDTO.getEmail(),
-                clienteDTO.getTelefone()
+                clienteDTO.getTelefone(),
+                clienteDTO.getEmail()
         );
 
         Cliente clienteResponse = clienteRepository.save(cliente);
@@ -86,7 +86,7 @@ public class ClienteService {
 
             Cliente clienteEditado = clienteRepository.save(cliente);
 
-            return new ClienteResponse(
+            return new ClienteResponse (
                     clienteEditado.getId(),
                     clienteEditado.getNome(),
                     clienteEditado.getCpf(),

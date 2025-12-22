@@ -30,7 +30,7 @@ public class LoginController {
         if (usuario == null) {
             Response<LoginResponseDTO> loginResponse = new Response<>(
                     "Erro",
-                    "usuário ou senha incorrétos",
+                    "usuário ou senha incorretos",
                     LocalDateTime.now(),
                     null
             );
@@ -60,6 +60,8 @@ public class LoginController {
     @PostMapping("/logout")
     ResponseEntity<String> logout(HttpServletResponse response) {
         Cookie cookie = new Cookie("AUTH_TOKEN", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
         cookie.setPath("/");
         cookie.setMaxAge(0);
 

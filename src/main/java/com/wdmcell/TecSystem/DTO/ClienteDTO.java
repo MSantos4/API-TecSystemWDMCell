@@ -17,6 +17,7 @@ public class ClienteDTO {
     @Pattern(regexp = "^\\(?\\d{2}\\)?[\\s-]?\\d{4,5}-?\\d{4}$", message = "Telefone inválido")
     private String telefone;
 
+    @NotBlank(message = "Email obrigatório")
     @Email(message = "Digite um email válido")
     private String email;
 

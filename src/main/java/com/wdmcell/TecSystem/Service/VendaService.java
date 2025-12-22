@@ -1,6 +1,7 @@
 package com.wdmcell.TecSystem.Service;
 
 import com.wdmcell.TecSystem.DTO.ItemPedidoDTO;
+import com.wdmcell.TecSystem.DTO.Response.ClienteResponse;
 import com.wdmcell.TecSystem.DTO.Response.UltimaVendaResponse;
 import com.wdmcell.TecSystem.DTO.Response.VendaResponse;
 import com.wdmcell.TecSystem.DTO.VendaDTO;
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -36,12 +37,10 @@ public class VendaService {
 
         Cliente cliente = clienteRepository.findById(vendaDTO.getPedido().getClienteId())
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
-        System.out.println(cliente.getNome());
         pedido.setCliente(cliente);
 
         Funcionario funcionario = funcionarioRepository.findById(vendaDTO.getPedido().getFuncionarioId())
                 .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
-        System.out.println(funcionario.getNome());
         pedido.setFuncionario(funcionario);
 
         // Criar caixa
@@ -88,6 +87,36 @@ public class VendaService {
                 quantidadeItens,
                 vendaCadastrada.getValor()
         );
+    }
+
+    public List<VendaResponse> buscarVendas() {
+        List<Caixa> vendas = caixaRepository.findAll();
+
+        if (vendas.isEmpty()) {
+            throw new RuntimeException("Nenhuma venda encontrada no caixa.");
+        }
+
+        return vendas.stream().map(caixa -> {
+            int totalItens = caixa.getItensDePedido().stream()
+                    .mapToInt(ItemPedido::getQuantidade)
+                    .sum();
+
+            String nomeCliente = "Não Identificado";
+
+            if (!caixa.getItensDePedido().isEmpty()) {
+                ItemPedido primeiroItem = caixa.getItensDePedido().get(0);
+                if (primeiroItem.getPedido() != null && primeiroItem.getPedido().getCliente() != null) {
+                    nomeCliente = primeiroItem.getPedido().getCliente().getNome();
+                }
+            }
+
+            return new VendaResponse(
+                    caixa.getId(),
+                    nomeCliente,
+                    totalItens,
+                    caixa.getValor()
+            );
+        }).collect(Collectors.toList());
     }
 
     public UltimaVendaResponse buscarUltimaVenda() {

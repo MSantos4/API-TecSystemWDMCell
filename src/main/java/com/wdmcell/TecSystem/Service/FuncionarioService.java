@@ -100,11 +100,13 @@ public class FuncionarioService {
         } else  {
             Funcionario funcionario = funcionarioEditar.get();
 
+            String senhaHash = passwordEncoder.encode(funcionarioDTO.getSenha());
+
             funcionario.setNome(funcionarioDTO.getNome());
             funcionario.setMatricula(funcionarioDTO.getMatricula());
             funcionario.setCpf(funcionarioDTO.getCpf());
             funcionario.getLogin().setUsuario(funcionarioDTO.getUsuario());
-            funcionario.getLogin().setSenha(funcionarioDTO.getSenha());
+            funcionario.getLogin().setSenha(senhaHash);
             funcionario.getLogin().setNivel_permissao(funcionarioDTO.getNivel_permissao());
 
             Funcionario funcionarioEditado = funcionarioRepository.save(funcionario);

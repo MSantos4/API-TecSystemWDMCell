@@ -24,6 +24,7 @@ public class ClienteController {
     public ResponseEntity<Response<ClienteResponse>> salvar(@RequestBody @Valid ClienteDTO clienteDTO) {
         try {
             ClienteResponse clienteResponse = clienteService.salvar(clienteDTO);
+            System.out.println(clienteDTO.getTelefone());
 
             Response<ClienteResponse> response = new Response<>(
                     "Sucesso",
@@ -90,7 +91,6 @@ public class ClienteController {
                     LocalDateTime.now(),
                     null
             );
-
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }

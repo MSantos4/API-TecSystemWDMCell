@@ -1,5 +1,6 @@
 package com.wdmcell.TecSystem.Controller;
 
+import com.wdmcell.TecSystem.DTO.Response.ClienteResponse;
 import com.wdmcell.TecSystem.DTO.Response.Response;
 import com.wdmcell.TecSystem.DTO.Response.UltimaVendaResponse;
 import com.wdmcell.TecSystem.DTO.Response.VendaResponse;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,6 +41,30 @@ public class CaixaController {
                     LocalDateTime.now()
             );
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
+
+    @GetMapping("/todos")
+    public ResponseEntity<Response<List<VendaResponse>>> buscarVendas() {
+        try {
+            List<VendaResponse> clientesResponse = vendaService.buscarVendas();
+
+            Response<List<VendaResponse>> response = new Response<>(
+                    "Sucesso",
+                    "Vendas encontradas com sucesso!",
+                    LocalDateTime.now(),
+                    clientesResponse
+            );
+
+            return ResponseEntity.status(HttpStatus.OK).body(response);
+        } catch (Exception e) {
+            Response<List<VendaResponse>> response = new Response<>(
+                    "Erro",
+                    e.getMessage(),
+                    LocalDateTime.now(),
+                    null
+            );
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
         }
     }
 
