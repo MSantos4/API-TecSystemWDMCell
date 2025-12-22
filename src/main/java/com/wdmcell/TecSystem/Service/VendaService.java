@@ -56,6 +56,12 @@ public class VendaService {
             Produto produto = produtoRepository.findById(itemDTO.getProdutoId())
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
+            int linhasAfetadas = produtoRepository.diminuirEstoque(produto.getId(), itemDTO.getQuantidade());
+
+            if (linhasAfetadas == 0) {
+                throw new RuntimeException("Estoque insuficiente ou erro ao atualizar produto: " + produto.getModelo());
+            }
+
             ItemPedido item = new ItemPedido();
             item.setProduto(produto);
             item.setQuantidade(itemDTO.getQuantidade());
