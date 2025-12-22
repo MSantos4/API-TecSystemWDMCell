@@ -1,7 +1,8 @@
 package com.wdmcell.TecSystem.Model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;

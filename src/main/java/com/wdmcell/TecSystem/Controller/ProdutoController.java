@@ -170,6 +170,7 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Response<Void>> deletar(@PathVariable Long id) {
         try {
+            System.out.println(id);
             produtoService.deletar(id);
 
             Response<Void> response = new Response<>(

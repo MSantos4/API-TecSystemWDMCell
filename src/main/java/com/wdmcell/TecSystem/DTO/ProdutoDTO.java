@@ -1,17 +1,18 @@
 package com.wdmcell.TecSystem.DTO;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 
 public class ProdutoDTO {
     @NotBlank(message = "Marca é obrigatório")
     private String marca;
-    @NotBlank(message = "Model é obrigatório")
+    @NotBlank(message = "Modelo é obrigatório")
     private String modelo;
-    @NotBlank(message = "Preço de compra é obrigatório")
+    @Positive(message = "O preço de compra deve sair maior que 0")
     private Double preco_compra;
-    @NotBlank(message = "Preço de venda é obrigatório")
+    @Positive(message = "O preço de venda deve sair maior que 0")
     private Double preco_venda;
-    @NotBlank(message = "Quantidade de estoque é obrigatório")
+    @Positive(message = "O produto precisa ter estoque para ser cadastrado")
     private int estoque;
     @NotBlank(message = "Tipo de tela é obrigatório")
     private String tela;
@@ -25,9 +26,9 @@ public class ProdutoDTO {
     private String bateria;
     @NotBlank(message = "Sistema e versão são obrigatórios")
     private String sistema;
-    @NotBlank(message = "Tamnho da espessura é obrigatório")
+    @Positive(message = "A espessura deve sair maior que 0")
     private Double espessura;
-    @NotBlank(message = "Peso é obrigatório")
+    @Positive(message = "O Peso deve sair maior que 0")
     private Double peso;
 
     public ProdutoDTO(String marca, String modelo, Double preco_compra, Double preco_venda, int estoque, String tela, String processador, String armazenamento, String memoria, String bateria, String sistema, Double espessura, Double peso) {

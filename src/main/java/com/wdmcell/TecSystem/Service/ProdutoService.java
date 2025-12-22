@@ -1,12 +1,9 @@
 package com.wdmcell.TecSystem.Service;
 
-import com.wdmcell.TecSystem.DTO.ClienteDTO;
 import com.wdmcell.TecSystem.DTO.EstoqueDTO;
 import com.wdmcell.TecSystem.DTO.MarcaDTO;
 import com.wdmcell.TecSystem.DTO.ProdutoDTO;
-import com.wdmcell.TecSystem.DTO.Response.ClienteResponse;
 import com.wdmcell.TecSystem.DTO.Response.ProdutoResponse;
-import com.wdmcell.TecSystem.Model.Cliente;
 import com.wdmcell.TecSystem.Model.Especificacao;
 import com.wdmcell.TecSystem.Model.Produto;
 import com.wdmcell.TecSystem.Repository.ProdutoRepository;
@@ -178,3 +175,16 @@ public class ProdutoService {
         return produtoRepository.listarMarcas();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
